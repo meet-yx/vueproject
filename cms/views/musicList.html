@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot"/>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff"/>
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/classManage.css"/>
+    <title></title>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="scrollbar">
+<div class="container-fluid"><!--最外层-->
+    <div class="row">
+        <div class="col-lg-12 titleDiv">
+            <p class="crumbs">音乐管理</p>
+            <!--粉色的添加按钮-->
+            <div class="songAddBtn addBtn" musicType="2">
+                <button class="btn btnplus" id="song-addb" type="button" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <span class="addSong">上传歌单</span>
+            </div>
+            <div class="musicAddBtn addBtn" musicType="1">
+                <button class="btn btnplus" id="music-addb" type="button">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <span class="addMusic">上传音乐</span>
+            </div>
+
+        </div>
+    </div>
+    <div class="row contantBox">
+        <!--装内容的Box-->
+        <div class="col-lg-12">
+            <!-------------------------------音乐列表 begin--------------------------------------->
+            <!--=============装查询===============-->
+            <form class="row border3 ">
+                <div class="col-lg-12 txtSearch">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        音乐名称 <input type="text" class="txtBox" id="music-txtUserName"/><!-- classNoQue-->
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        创建人 <input type="text" class="txtBox" id="music-txtRealName"/><!-- classNameQue-->
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que" style="margin-left: -30px">
+                        状态 <select name="txtState" id="music-txtState">
+                        <option value="">全部</option>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+
+                    </select><!-- projectManagerQue-->
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 pull-right">
+                        <button class="btn btnsave" type="button" id="music-searchBtn">查询</button>
+                    </div>
+                </div>
+            </form>
+            <!--=================装表格==================-->
+            <div class="row border1">
+                <div class="col-lg-12">
+                    <div class="table-responsive scrollbar">
+                        <table class="table border" id="music-classTable">
+                            <thead><h3>音乐列表</h3>
+                            <tr>
+                                <th>编号</th>
+                                <th>音乐名称</th>
+                                <th>创建人</th>
+                                <th>添加时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="music-tbody">
+                            <% musicList.forEach(function(e){%>
+                            <tr>
+                                <td><%= e.id%></td>
+                                <td><%= e.musicName%></td>
+                                <td><%= e.username%></td>
+                                <td><%=new Date(e.DATE).toLocaleString()%></td>
+                                <td>
+                                    <%if (e.state==1){%>
+                                    启用
+                                    <%}else{%>
+                                    禁用
+                                    <%}%>
+                                </td>
+                                <td>
+                                    <!--<span class="editBtn" myid="<%=e.id%>">修改</span>-->
+
+                                    <%if (e.state==1){%>
+                                    <button class="music-delBtn btn btn-danger" myid="<%=e.id%>" stateCode="<%=e.state%>">禁用</button>
+                                    <%}else{%>
+                                    <button class="music-delBtn btn btn-success" myid="<%=e.id%>" stateCode="<%=e.state%>">启用</button>
+                                    <%}%>
+                                </td>
+                            </tr>
+                            <%})%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--页脚的分页-->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="">
+                                <a aria-label="Previous" id="music-prev">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li id="music-pageNum">
+                                <!--<a>1</a>-->
+                            </li>
+                            <li class="">
+                                <a aria-label="Next" id="music-next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <br/><br/>
+                </div>
+            </div>
+            <br/><br/>
+            <!--------------------------------------音乐列表 end---------------------------------->
+            <!--------------------------------------歌单列表 begin-------------------------------->
+            <!--=================装查询==================-->
+            <form class="row border3 ">
+                <div class="col-lg-12 txtSearch">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        歌单名称 <input type="text" class="txtBox" id="song-txtUserName"/><!-- classNoQue-->
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        创建人 <input type="text" class="txtBox" id="song-txtRealName"/><!-- classNameQue-->
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        状态 <select name="txtState" id="song-txtState" class="col-lg-5">
+                        <option value=""></option>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+
+                    </select><!-- projectManagerQue-->
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 pull-right">
+                        <button class="btn btnsave" type="button" id="song-searchBtn">查询</button>
+                    </div>
+                </div>
+            </form>
+            <!--=================装表格==================-->
+            <div class="row border1">
+                <div class="col-lg-12">
+                    <div class="table-responsive scrollbar">
+                        <table class="table border" id="song-classTable">
+                            <thead><h3>歌单列表</h3>
+                            <tr>
+                                <th>编号</th>
+                                <th>歌单名称</th>
+                                <th>创建人</th>
+                                <th>添加时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="song-tbody">
+                            <% songList.forEach(function(e){%>
+                            <tr>
+                                <td><%= e.id%></td>
+                                <td><%= e.musicName%></td>
+                                <td><%= e.username%></td>
+                                <td><%=new Date(e.DATE).toLocaleString()%></td>
+                                <td>
+                                    <%if (e.state==1){%>
+                                    启用
+                                    <%}else{%>
+                                    禁用
+                                    <%}%>
+                                </td>
+                                <td>
+
+                                    <%if (e.state==1){%>
+                                    <button class="song-delBtn btn btn-danger" myid="<%=e.id%>" stateCode="<%=e.state%>">禁用</button>
+                                    <%}else{%>
+                                    <button class="song-delBtn btn btn-success" myid="<%=e.id%>" stateCode="<%=e.state%>">启用</button>
+                                    <%}%>
+                                </td>
+                            </tr>
+                            <%})%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--页脚的分页-->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="">
+                                <a aria-label="Previous" id="song-prev">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li id="song-pageNum">
+                                <!--<a>1</a>-->
+                            </li>
+                            <li class="">
+                                <a aria-label="Next" id="song-next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-------------------------------------歌单列表 end------------------------------->
+        </div>
+    </div>
+</div>
+<!-- 确认操作模态框（Modal） -->
+<div class="modal fade bs-example-modal-lg" id="myModal0" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel1"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row borderLine">
+                    <div class="row">
+                        <div class="col-lg-12 h2" id="addTitName">新增数据</div>
+                        <div class="col-lg-12 classCreateInfo">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 addName">
+                                    文件名称 <input type="text" class="txtBox" id="musicName"
+                                                style="width:150px;margin-left: 5%"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    <form action="" method="post" enctype="multipart/form-data" id="musicFile">
+                                        <input type="file" class="txtBox" name="musicFile" id="upload" style="margin-left:25%"/>
+                                    </form>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    状态
+                                    <select id="addState" style="margin-right:25%">
+                                        <option value="1">启用</option>
+                                        <option value="0">禁用</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row updateBtn">
+                    <div class="col-lg-12">
+                        <button type="button" class="btn btn-primary" id="addMusicBtn">确认上传</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="js/ajax.js"></script>
+<script src="js/musicList.js"></script>
+</body>
+</html>

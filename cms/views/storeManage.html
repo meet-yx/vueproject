@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot"/>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff"/>
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/classManage.css"/>
+    <title></title>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="scrollbar">
+<div class="container-fluid"><!--最外层-->
+    <div class="row">
+        <div class="col-lg-12 titleDiv">
+            <p class="crumbs">商品管理</p>
+            <!--粉色的添加按钮-->
+            <div class="addBtn" id="addBtn" data-toggle="modal" data-target="#myModal11">
+                <button class="btn btnplus" id="addb" type="button">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button><span class="addUser">添加商品</span>
+            </div>
+            <div class="addBtn" id="addTypeBtn" data-toggle="modal" data-target="#myModal12">
+                <button class="btn btnplus" id="addTypeb" type="button">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button><span class="addUser">添加商品类别</span>
+            </div>
+        </div>
+    </div>
+    <div class="row contantBox">
+        <!--装内容的Box-->
+        <div class="col-lg-12">
+            <!--=============装查询===============-->
+            <form class="row border3 ">
+                <div class="col-lg-12 txtSearch">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        商品名称 <input type="text" class="txtBox" id="goodsName"/>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        商品库存 <input type="text" class="txtBox" id="goodsStorage"/>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        状态
+                        <select name="txtState" id="goodsState">
+                        <option value=""></option>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+
+                    </select><!-- projectManagerQue-->
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 pull-right">
+                        <button class="btn btnsave" type="button" id="searchBtn">查询</button>
+                    </div>
+                </div>
+            </form>
+            <!--=================装表格==================-->
+            <div class="row border1">
+                <div class="col-lg-12">
+                    <div class="table-responsive scrollbar">
+                        <table class="table border" id="classTable">
+                            <thead>
+                            <tr>
+                                <th>商品编号</th>
+                                <th>商品名称</th>
+                                <th>商品类别</th>
+                                <th>商品价格</th>
+                                <th>库存</th>
+                                <th>收藏数</th>
+                                <th>创建人</th>
+                                <th>创建时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            <%for(var i=0;i<data.length;i++){%>
+                            <tr>
+                                <td><%=data[i].Id%></td>
+                                <td><%=data[i].NAME%></td>
+                                <td><%=data[i].TYPE　%></td>
+                                <td><%=data[i].Price%></td>
+                                <td><%=data[i].STORAGE%></td>
+                                <td><%=data[i].collectNum%></td>
+                                <td><%=data[i].userName%></td>
+                                <td><%=data[i].DATE%></td>
+                                <td>
+                                    <%if(data[i].State==1){%>
+                                    启用
+                                    <%}else{%>
+                                    禁用
+                                    <%}%>
+                                </td>
+                                <td>
+                                    <button type="button" class="editBtn btn btn-info" data-target="#myModal0" data-toggle="modal" myid="<%=data[i].Id%>">修改</button>
+                                    <%if (data[i].State==1){%>
+                                    <button class="delBtn btn btn-danger"  myid="<%=data[i].Id%>" stateCode="<%=data[i].State%>">禁用</button>
+                                    <%}else{%>
+                                    <button class="delBtn btn btn-success"  myid="<%=data[i].Id%>" stateCode="<%=data[i].State%>">启用</button>
+                                    <%}%>
+                                </td>
+                            </tr>
+                            <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--页脚的分页-->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="">
+                                <a  aria-label="Previous" id="prev">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li id="pageNum">
+                                <!--<a>1</a>-->
+                            </li>
+                            <li class="">
+                                <a  aria-label="Next" id="next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 确认操作模态框（Modal） -->
+<div class="modal fade"
+     id="myModal" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
+            <div class="modal-header modal0">
+                <!--关闭窗口的××-->
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+                <!--提示信息-->
+                <h4 class="modal-title" id="myModalLabel">
+                    确认此操作吗？
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <!--确认按钮-->
+                <button type="button" class="btnconfirm okBtn" data-toggle="modal" data-target="#myModal2"  data-dismiss="modal"
+                        aria-hidden="true">
+                    确定
+                </button>
+                <!--取消按钮-->
+                <button type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal">
+                    取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--=====================修改模态框=======================-->
+<div class="modal fade bs-example-modal-lg" id="myModal0" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel1">编辑</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row borderLine">
+                    <div class="row">
+                        <div class="col-lg-12 h2">商品基本信息</div>
+                        <div class="col-lg-12 classCreateInfo">
+                            <div class="row">
+                                <form action="" enctype="multipart/form-data">
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        商品名称 <input type="text" class="txtBox" id="updateName"/>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        商品价格 <input type="text" class="txtBox" id="updatePrice"/>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        商品库存
+                                        <input type="text" class="txtBox" id="updateStarage"/>
+                                        <!--<select id="classStatus"></select>-->
+                                        <!--<input type="text" class="txtBox" id="classStatus"/>-->
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        商品图片 <input type="file" class="txtBox" id="updateThumbnail" multiple/>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        商品介绍 <input type="file" class="txtBox" id="updateDes" multiple/>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        商品类型
+                                        <select name="" id="updateType"></select>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        商品颜色:
+                                        <div id="updateColor">
+                                    </div>
+                                        <button type="button"　class="btn">更多颜色</button>
+
+                                        <!--<select name="" class="txtBox" id="goodsType1"></select>-->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listItem col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <p class="message"></p>
+                    </div>
+                    <div class="row updateBtn">
+                        <div class="col-lg-12">
+                            <button type="button" class="btn btn-primary" id="updateBtn">修改</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--============================新增模态框======================-->
+<div class="modal fade bs-example-modal-lg" id="myModal11" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2">添加商品</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row borderLine">
+                    <div class="row">
+                        <div class="col-lg-12 h2">商品信息</div>
+                        <div class="col-lg-12 classCreateInfo">
+                            <div class="row">
+                                <form action="" method="post" enctype="multipart/form-data" >
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        商品名称 <input type="text" class="txtBox" id="goodsName1"/>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        商品价格 <input type="text" class="txtBox" id="goodsPrice1"/>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        商品库存
+                                        <input type="text" class="txtBox" id="goodsStorage1"/>
+                                        <!--<select id="classStatus"></select>-->
+                                        <!--<input type="text" class="txtBox" id="classStatus"/>-->
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        商品图片 <input type="file" class="txtBox" id="goodsImg1" multiple/>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        商品介绍 <input type="file" class="txtBox" id="goodsDes1" multiple/>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        商品类型
+                                        <select name="" id="goodsType1"></select>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        商品颜色:
+                                        <div id="colorGroup">
+
+                                        </div>
+                                        <button type="button"　class="btn">更多颜色</button>
+
+                                        <!--<select name="" class="txtBox" id="goodsType1"></select>-->
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 h2">添加商品展示图片</div>
+                        <div class="col-lg-12 classCreateInfo">
+                            <div class="row">
+                                <form action="" method="post" enctype="multipart/form-data" name="fileInfo" id="form1">
+                                    <!-- =============添加商品首页展示图片-->
+                                    <div id="goodsShowImg">
+
+                                    </div>
+
+                                    <div class="form-signin-heading" id="btnUpload">+</div>
+                                    <input type="file" name="txtFile" id="txtFile" style="display: none" accept=".jpg,.png,.jpeg,.gif,.bmp" onchange="xmTanUploadImg(this)" multiple/>
+                                    <!--<button type="submit" class="btn">添加图片</button>-->
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listItem col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <p class="message"></p>
+                    </div>
+                    <div class="row updateBtn">
+                        <div class="col-lg-12">
+                            <button type="button" class="btn btn-primary" id="saveBtn">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--=================添加商品类别====================-->
+<div class="modal fade bs-example-modal-lg" id="myModal12" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel3">添加商品类别</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row borderLine">
+                    <div class="row">
+                        <div class="col-lg-12 h2">商品类别</div>
+                        <div class="col-lg-12 classCreateInfo">
+                            <div class="row">
+                                <form enctype="multipart/form-data" >
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        类别 <input type="text" class="txtBox" id="goodsType"/>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        名称 <input type="text" class="txtBox" id="goodsTypeName"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listItem col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <p class="message"></p>
+                    </div>
+                    <div class="row updateBtn">
+                        <div class="col-lg-12">
+                            <button type="button" class="btn btn-primary" id="addGoodsTypeBtn">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="js/ajax.js"></script>
+<script src="js/storeManage.js"></script>
+</body>
+</html>

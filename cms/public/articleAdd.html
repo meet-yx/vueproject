@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot"/>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff"/>
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/classManage.css"/>
+    <title></title>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="scrollbar">
+<div class="container-fluid">
+    <!--面包屑-->
+    <div class="row">
+        <p class="addCrumbs"><a href="classManage.html">文章管理</a>&ensp;\&ensp;<span class="crumbsTxt">新增文章</span></p>
+    </div>
+    <div class="row border4">
+        <div class="col-lg-12 h2">基本信息</div>
+        <div class="col-lg-12 classCreateInfo">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
+                    文章标题 <input type="text" class="txtBox center" id="txtTitle" name="txtTitle" form="articleContent" style="width:620px">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6" style="margin-left: 5%;">
+                    作者 <input type="text" class="txtBox" id="author" name="author" form="articleContent"/>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6" style="margin-top: 10px;">
+                    <lable for="thumbnail">文章介绍图</lable>
+                    <input type="file" class="txtBox inline" id="thumbnail" name="thumbnail" form="articleContent" style="display: inline"/>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-12 h2">详细内容</div>
+        <div class="col-lg-12 classCreateInfo1">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="togglePanel">
+
+                        <form action="/course/articleAdd.do" name="articleContent" id="articleContent" method="post" enctype="multipart/form-data" >
+                            <textarea name="txtContent" id="txtContent" cols="30" rows="10" class="form-control" ></textarea>
+                        </form>
+                   <!--     <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="home">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        总人数 <input type="text" class="txtBox1" id="classTotal"/>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <span class="stu">本科</span>
+                                        <input type="text" class="txtBox1" id="classCollage"/>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        &ensp;&ensp;男生
+                                        <input type="text" class="txtBox1" id="classBoy"/>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <span class="stu">专科</span>
+                                        <input type="text"  class="txtBox1" id="classJunior"/>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        &ensp;&ensp;女生 <input type="text" class="txtBox1" id="classGirl"/>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        高中或以下学历 <input type="text" class="txtBox1" id="classSenior"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="profile">
+                                <div class="table-responsive">
+                                    <table class="table updateTable">
+                                        <thead>
+                                        <tr>
+                                            <th>修改日期</th>
+                                            <th>修改人</th>
+                                            <th>修改项</th>
+                                            <th>修改记录详情</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="updateTr">
+                                            <td class="updateDate"></td>
+                                            <td class="updatePerson"></td>
+                                            <td class="updateWhere"></td>
+                                            <td class="updateDetail"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="listItem col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <p class="message"></p>
+        </div>
+        <div class="row updateBtn">
+            <div class="col-lg-3 col-md-3"></div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 myButton">
+                <!--查询按钮-->
+                <button type="button" class="btnconfirm" id="cancel">
+                    取消
+                </button>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 myButton">
+                <!--查询按钮-->
+                <button type="submit" form="articleContent" class="btnconfirm saveBtn" id="articleAddSave">
+                    保存
+                </button>
+            </div>
+            <div class="col-lg-3 col-md-3"></div>
+            <!--<div class="col-lg-12">-->
+
+                <!--<button type="button" class="btn btn-primary" id="updateBtn">修改</button>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
+<script charset="utf-8" src="/KindEditor/kindeditor-all-min.js"></script>
+<script charset="utf-8" src="/KindEditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('#txtContent', {
+            allowImageUpload : true, //支持图片上传
+            uploadJson: '/uploadImg.do',   //图片上传时向服务提交的地址
+            items : [
+                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic',
+                'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright',    'insertorderedlist', 'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+        });
+    });
+</script>
+<script src="js/ajax.js"></script>
+<script src="js/articleList.js"></script>
+</body>
+</html>

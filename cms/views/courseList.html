@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot"/>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff"/>
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/classManage.css"/>
+    <title></title>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="scrollbar">
+<div class="container-fluid"><!--最外层-->
+    <div class="row">
+        <div class="col-lg-12 titleDiv">
+            <p class="crumbs">课程管理</p>
+            <!--粉色的添加按钮-->
+            <div class="addBtn" data-toggle="modal" data-target="#myModal0">
+                <button class="btn btnplus" id="addb" type="button">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button><span class="addUser">添加课程</span>
+            </div>
+        </div>
+    </div>
+    <div class="row contantBox">
+        <!--装内容的Box-->
+        <div class="col-lg-12">
+            <!--=============装查询===============-->
+            <form class="row border3 ">
+                <div class="col-lg-12 txtSearch">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        课程名称 <input type="text" class="txtBox" id="txtUserName"/><!-- classNoQue-->
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        创建人 <input type="text" class="txtBox" id="txtRealName"/><!-- classNameQue-->
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que" style="margin-left: -30px">
+                        状态
+                        <select name="txtState" id="txtState">
+                            <option value="">全部</option>
+                            <option value="1">启用</option>
+                            <option value="0">禁用</option>
+                        </select><!-- projectManagerQue-->
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 pull-right">
+                        <button class="btn btnsave" type="button" id="searchBtn">查询</button>
+                    </div>
+                </div>
+            </form>
+            <!--=================装表格==================-->
+            <div class="row border1">
+                <div class="col-lg-12">
+                    <div class="table-responsive scrollbar">
+                        <table class="table border" id="classTable">
+                            <thead>
+                            <tr>
+                                <th>课程编号</th>
+                                <th>课程名称</th>
+                                <th>课程阶段</th>
+                                <th>课程简介</th>
+                                <th>课程视频地址</th>
+                                <th>赞数量</th>
+                                <th>收藏数量</th>
+                                <th>发布时间</th>
+                                <th>创建人</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            <% data.forEach(function(e){%>
+                            <tr>
+                                <td><%= e.id %></td>
+                                <td><%= e.courseName %></td>
+                                <td><%= e.stageName %></td>
+                                <td><%= e.courseDes %></td>
+                                <td><%= e.videoSrc %></td>
+                                <td><%= e.praise %></td>
+                                <td><%= e.collect %></td>
+                                <td><%=new Date(e.DATE).toLocaleString() %></td>
+                                <td><%= e.createuser%></td>
+                                <td>
+                                    <%if (e.state==1){%>
+                                    启用
+                                    <%}else{%>
+                                    禁用
+                                    <%}%>
+                                </td>
+                                <td>
+                                    <button type="button" class="editBtn btn btn-info" myid="<%=e.id%>" data-toggle='modal' data-target='#myModal11'>修改</button>
+
+                                    <%if (e.state==1){%>
+                                    <button type="button" class="delBtn btn btn-danger"  myid="<%=e.id%>" stateCode="<%=e.state%>">禁用</button>
+                                    <%}else{%>
+                                    <button type="button" class="delBtn btn btn-success" myid="<%=e.id%>" stateCode="<%=e.state%>">启用</button>
+                                    <%}%>
+                                </td>
+                            </tr>
+                            <%})%>
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <!--页脚的分页-->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="">
+                                <a  aria-label="Previous" id="prev">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li id="pageNum">
+                                <!--<a>1</a>-->
+                            </li>
+                            <li class="">
+                                <a  aria-label="Next" id="next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 确认操作模态框（Modal） -->
+<div class="modal fade"
+     id="myModal" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
+            <div class="modal-header modal0">
+                <!--关闭窗口的××-->
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+                <!--提示信息-->
+                <h4 class="modal-title" id="myModalLabel">
+                    确认此操作吗？
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <!--确认按钮-->
+                <button type="button" class="btnconfirm okBtn" data-toggle="modal" data-target="#myModal2"  data-dismiss="modal"
+                        aria-hidden="true">
+                    确定
+                </button>
+                <!--取消按钮-->
+                <button type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal">
+                    取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--=====================添加模态框=======================-->
+<div class="modal fade bs-example-modal-lg" id="myModal0" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel1">添加</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row borderLine">
+                    <div class="row">
+                        <div class="col-lg-12 h2">课程信息</div>
+                        <div class="col-lg-12 classCreateInfo">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    课程名称 <input type="text" class="txtBox" id="classNo"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    课程简介<input type="text" class="txtBox" id="classStatus"/>
+                                    <!--<input type="text" class="txtBox" id="classStatus"/>-->
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    课程视频地址  <input type="text" class="txtBox" id="classNames"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    赞数量 <input type="text" class="txtBox" id="zanClass"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    收藏数量 <input type="text" class="txtBox" id="classMon"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    课程阶段
+                                    <!--<input type="text" class="txtBox" id="className"/>-->
+                                    <select name="" id="className">
+                                        <option value="">全部</option>
+                                        <option value="1">一阶段</option>
+                                        <option value="2">二阶段</option>
+                                        <option value="3">三阶段</option>
+                                    </select><!-- projectManagerQue-->
+                                </div>
+                                <!--<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">-->
+                                    <!--发布时间<input type="text" class="txtBox" id="classkom"/>-->
+                                <!--</div>-->
+                                <!--<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">-->
+                                    <!--创建人 <input type="text" class="txtBox" id="classNom"/>-->
+                                <!--</div>-->
+                                <!--<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">-->
+                                    <!--状态-->
+                                    <!--<select name="txtState" id="startDay">-->
+                                        <!--<option value="1">启用</option>-->
+                                        <!--<option value="0">禁用</option>-->
+                                    <!--</select>&lt;!&ndash; projectManagerQue&ndash;&gt;-->
+                                <!--</div>-->
+                            </div>
+                            <div class="listItem col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <p class="message"></p>
+                            </div>
+                            <div class="row updateBtn">
+                                <div class="col-lg-12">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveBtn">确认添加</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 h2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!--修改模态框-->
+<div class="modal fade bs-example-modal-lg" id="myModal11" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel11">修改</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row borderLine">
+                    <div class="row">
+                        <div class="col-lg-12 h2">课程信息</div>
+                        <div class="col-lg-12 classCreateInfo">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    课程名称 <input type="text" class="txtBox" id="activityDoor"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    课程简介<input type="text" class="txtBox" id="activityState"/>
+                                    <!--<input type="text" class="txtBox" id="classStatus"/>-->
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    课程视频地址  <input type="text" class="txtBox" id="activityTotal"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    赞数量 <input type="text" class="txtBox" id="createDate"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    收藏数量 <input type="text" class="txtBox" id="createUser"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    课程阶段
+                                    <!--<input type="text" class="txtBox" id="activityName"/>-->
+                                    <select name="" id="activityName">
+                                        <option value="">全部</option>
+                                        <option value="一阶段">一阶段</option>
+                                        <option value="二阶段">二阶段</option>
+                                        <option value="三阶段">三阶段</option>
+                                    </select><!-- projectManagerQue-->
+                                </div>
+                                <!--<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">-->
+                                    <!--发布时间<input type="text" class="txtBox" id="activityhoster"/>-->
+                                <!--</div>-->
+                                <!--<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">-->
+                                    <!--创建人 <input type="text" class="txtBox" id="startData"/>-->
+                                <!--</div>-->
+                                <!--<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">-->
+                                    <!--状态-->
+                                    <!--<select name="txtState" id="classKmoon">-->
+                                        <!--<option value="">全部</option>-->
+                                        <!--<option value="1">启用</option>-->
+                                        <!--<option value="0">禁用</option>-->
+                                    <!--</select>&lt;!&ndash; projectManagerQue&ndash;&gt;-->
+                                <!--</div>-->
+                            </div>
+                            <div class="listItem col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <p class="message"></p>
+                            </div>
+                            <div class="row updateBtn">
+                                <div class="col-lg-12">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="updateBtn">确认</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 h2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="js/ajax.js"></script>
+<script src="js/courseList.js"></script>
+</body>
+</html>

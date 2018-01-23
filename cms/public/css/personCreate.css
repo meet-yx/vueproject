@@ -1,0 +1,277 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    color: #464646;
+}
+a:link{
+    text-decoration-line: none;
+}
+a:visited{
+    text-decoration-line: none;
+}
+a:hover{
+    text-decoration-line: none;
+}
+a:active{
+    text-decoration-line: none;
+}
+
+input{
+    height:28px;
+    margin: 10px 0;
+    width: 180px;
+    border: none;
+}
+
+select{
+    height:28px;
+    margin: 10px 0;
+    width: 180px;
+    border: none;
+}
+
+.row{
+    margin: 0;
+    padding: 0;
+}
+.col-lg-12,.col-lg-2{
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
+}
+/*===========�����==============*/
+.container-fluid{
+    width: 100%;
+    height:100%;
+    background-size:100%;
+    background-position: center;
+    padding:2%;
+}
+/*======================����=======================*/
+.contantBox{
+    width: 100%;
+    height: 100%;
+    background-color:rgba(255,255,255,0);
+    /*padding: 2%;*/
+}
+
+/*===================���м===========*/
+.crumbs{
+    font-size: 20px;
+    line-height: 32px;
+    text-align: left;
+    padding:0 0 1% 0;
+}
+
+.bg-white{                          /*�󱳾����ɫ*/
+    border-radius: 10px;
+}
+
+.border{
+    /*height: 80px;*/
+    border-radius: 10px;
+    background-color:  #eef9f0;
+}
+/*============�м䲿��======================*/
+.border1{                       /*���*/
+    height: 100%;
+    border-radius: 10px;
+    background-color: #eef9f0;
+    padding: 4%;
+    margin: 2% 0;
+}
+.reachText {
+    /*��һ�б�ͷ�������ı���*/
+    padding: 7px 10px;
+    background-color: rgb(221, 238, 222);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.reachText input{
+    width: 200px;
+}
+.name-text{                     /*�ڶ��еĵ�һ�������*/
+    padding: 10px;
+}
+
+.panddingLeft {
+    padding-left: 0;
+}
+.panddingRight{
+    padding-right: 0;
+}
+
+textarea{           /*�����ı���*/
+    width: 100%;
+    border: none;
+}
+.beiZhu{
+    margin: 20px 0;
+}
+/*��ɫ���水ť�����Ըı�����*/
+.btnsave{
+    color: white;
+    background-color:#F0BCB4;
+    padding:5px 30px;
+    border-radius: 5px;
+    border-style:none;
+    cursor: pointer;
+    /*margin: 20px 0;*/
+}
+/*��ɫ����*/
+.btnsave:hover{
+    color: white;
+    background-color:#FA9FA4;
+}
+
+/*��ɫ��ȡ����ť*/
+.btnquxiao{
+    background-color: white;
+    padding: 5px 30px;
+    border-radius: 5px;
+    cursor:pointer;
+    color:#776680;
+    /*border-color:#DEE5E7;*/
+    /*margin: 20px 0;*/
+}
+.btnquxiao:hover{
+    border-color:#DEE5E7;
+    color:#776680;
+    background-color:#E6E6E6;
+}
+
+
+
+/*��ɫ���������밴ť*/
+.reachSet{
+    margin: 10px 0;
+}
+.personAlterPassword{
+    height:30px;
+    width: 85px;
+    border-style:none;
+    background-color:#F0BCB4;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 3.5%;
+    color: white;
+}
+.personAlterPassword:hover{
+    background-color:#FA9FA4;
+    color: white;
+}
+
+
+/*��ɫ��ɾ����ť*/
+.btndelete{
+    height:40px;
+    width: 40px;
+    border-style: none;
+    border-radius: 50%;
+    background-color:#999;
+
+}
+.glyphicon-minus{
+    color: white;
+}
+.btndelete:hover{
+    background-color:#666;
+
+}
+
+
+/*.table{
+    height: 400px;
+    /!*background-color: #fff;*!/
+    border-radius: 10px;
+    margin:0;
+}
+th{
+    background-color: #ddede0;
+    text-align: center;
+}
+.table>tbody>tr>th{
+    vertical-align: middle;
+}*/
+
+
+/*============�м䲿��======================*/
+
+.txtBox{
+    height:28px;
+    margin: 10px 0;
+    width: 100px;
+    border: none;
+}
+.txtSearch{
+    padding: 15px;
+    background-color: white;
+}
+
+.listItem{
+    margin: 10px 0;
+}
+
+.listItem .txtBox1{
+    border: 0;
+    height: 20px;
+    width: 180px;
+}
+
+/*�޸�����ģ̬��*/
+/*.modal-dialog{*/
+    /*width:60%;*/
+    /*height:85%;*/
+/*}*/
+.modal-content {
+    width:100%;
+    height:100%;
+    background-color: #ddede0;
+}
+.modal-header {
+    margin: 0 5px;
+    padding: 10px 0;
+    border-bottom: 1px solid #bbb;
+}
+.modal-body {
+    width: 95%;
+    height: 76%;
+    margin-left: 10px;
+    margin-top: 30px;
+    border: 2px dashed #bbb;
+}
+.modal-footer {
+    padding: 15px;
+    text-align: right;
+}
+/*================????=============*/
+.modal-title>span{
+    padding: 0 15px;
+}
+.modal-header>button{
+    padding: 0 15px;
+}
+
+.titleBlock{
+    font-size: 18px;
+}
+
+.name-text span{
+    width: 80px;
+}
+
+.name-text input{
+    /*height: 20px;*/
+    width: 180px;
+}
+
+.name-text select{
+    /*height: 20px;*/
+    width: 180px;
+}
+
+body{
+    background-color: transparent;
+}

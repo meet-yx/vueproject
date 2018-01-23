@@ -1,0 +1,276 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background:#464646 url("../img/bg.jpg") no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'microsoft yahei',Arial,sans-serif;
+    /*filter: opacity(0.6);*/
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 767px) {
+    body {
+        background-image: url("../img/bg.jpg");
+    }
+}
+
+.nav_header{
+    position: relative;
+    height: 80px;
+    background-color: #F0BCB4;
+}
+.nav_slide{
+    display: inline-block;
+    background-color: rgba(0,0,0,0.4);
+    /*height: 600px;*/
+    padding: 0;
+    width: 20%;
+}
+
+.iframeBlock{
+    display: inline-block;
+    padding:10px;
+    /*margin: 10px;*/
+    width: 80%;
+    background-color: transparent;
+}
+
+.iframeBlock iframe{
+    width: 100%;
+    height: 88%;
+}
+
+.nav>ul>li{
+    width: 100%;
+    height:46px;
+    border-bottom: 1px solid rgba(122,100,113,0.65);
+    transition: all .5s ease;
+    background-color: transparent;
+    color: rgba(226,226,226,1);
+    font-size: 16px;
+    overflow: hidden;
+    line-height: 46px;
+}
+
+.nav a{
+    color: rgba(226,226,226,1);
+    text-decoration: none;
+}
+
+.nav li:hover a{
+    color: white;
+}
+
+.nav li:hover{
+    background-color:rgba(79,64,61,1) !important;
+    cursor: pointer;
+}
+
+.nav span{
+    margin: 0 20px;
+}
+.nav>ul>li:first-child .fa-angle-right{
+    opacity: 1;
+}
+
+.nav>ul>li:first-child{
+    background-color:rgba(79,64,61,1);
+}
+
+.nav .fa-angle-right{
+    opacity: 0;
+}
+
+.secondNav{
+    font-size: 14px;
+}
+
+.secondNav li{
+    height: 50px;
+    line-height: 50px;
+}
+.secondNav li{
+    text-align: center;
+    font-size: 12px;
+    transition: all 0.5s ease;
+}
+
+.downAngle{
+    transform: rotate(0);
+    transition: all 0.5s ease;
+}
+
+.secondNav li:hover{
+    background-color:rgba(0,0,0,0.4) !important;
+}
+
+.welcomeBlock{
+    display: inline-block;
+    background-color: rgba(139,92,126,1);
+    height: 100%;
+    color: white;
+    position: relative;
+    width: 20%;
+    text-align: center;
+}
+
+.switch{
+    width: 34px;
+    height: 34px;
+    background-color: rgba(139,92,126,1);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 34px;
+    position: absolute;
+    left: 20%;
+    margin-left: -17px;
+    top: 23px;
+    z-index: 100;
+    transition: all 0.5s ease;
+}
+
+.switch:hover{
+    background-color: pink;
+    cursor: pointer;
+}
+
+.userBlock{
+    width: 115px;
+    height: 36px;
+    border-radius: 18px;
+    background-color:  rgba(139,92,126,1);
+    margin-right: 20px;
+    margin-top: 22px;
+    color: white;
+    line-height: 36px;
+}
+
+.userBlock img{
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    margin: 0 10px 0 3px;
+}
+
+.userBlock:hover{
+    cursor: pointer;
+}
+
+.userDetail{
+    position: absolute;
+    background-color: white;
+    z-index: 100;
+    width: 360px;
+    height: 150px;
+    right: 30px;
+    top: 70px;
+    border-radius: 10px;
+    display: none;
+}
+
+.userDetail a:hover{
+    text-decoration: none;
+}
+
+.userDetail img{
+    width: 110px;
+    height: 110px;
+    border-radius: 55px;
+    margin: 20px 20px 0 30px;
+    vertical-align: top;
+}
+
+.triangle{
+    position: absolute;
+    right: 30px;
+    top: -20px;
+    border-top:10px solid transparent ;
+    border-left:10px solid transparent ;
+    border-right:10px solid transparent ;
+    border-bottom:10px solid white;
+}
+
+.userInfo{
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.userInfo h3{
+    margin: 20px 0 10px;
+}
+
+.userInfo small{
+    font-size: 12px;
+    margin: 0 0 0 10px;
+}
+
+.userInfo p{
+    font-size: 12px;
+}
+
+.nav_bar{
+    position: absolute;
+    top: 0;
+    width: 80%;
+    background-color:rgba(0,0,0,0.9);
+    z-index: 150;
+    display: none;
+}
+
+.nav_bar .nav{
+    font-size: 12px !important;
+}
+
+.nav_bar_user img{
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    margin: 20px 30px 10px;
+    vertical-align: top;
+}
+
+.nav_bar_user .userInfo{
+    color: white;
+}
+
+.nav_bar .fa-close{
+    color: white;
+    margin: 20px;
+}
+
+.nav_bar .fa-close:hover{
+    cursor: pointer;
+}
+
+.nav_bar .userInfo p span{
+    margin: 0 30px 0 0;
+}
+
+/*侧边导航*/
+@media screen and (max-width: 992px){
+    .nav_slide{
+        display: none;
+    }
+
+    .iframeBlock{
+        width: 100%;
+    }
+
+    .welcomeBlock{
+        display: none;
+    }
+
+    .switch{
+        left: 30px;
+    }
+
+    .userBlock{
+        display: none;
+    }
+}
+

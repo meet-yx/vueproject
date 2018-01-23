@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot"/>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff"/>
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/classManage.css"/>
+    <title></title>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="scrollbar">
+<div class="container-fluid"><!--最外层-->
+    <div class="row">
+        <div class="col-lg-12 titleDiv">
+            <p class="crumbs">用户管理</p>
+            <!--粉色的添加按钮-->
+            <div class="addBtn" data-toggle="modal" data-target="#myModal0">
+                <button class="btn btnplus" id="addb" type="button">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button><span class="addAgency">添加机构</span>
+            </div>
+        </div>
+    </div>
+    <div class="row contantBox">
+        <!--装内容的Box-->
+        <div class="col-lg-12">
+            <!--=============装查询===============-->
+            <form class="row border3 ">
+                <div class="col-lg-12 txtSearch">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        机构名称 <input type="text" class="txtBox" id="txtAgencyName"/><!-- classNoQue-->
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que" style="margin-left: -30px">
+                        状态 <select name="txtState" id="txtState">
+                        <option value="">全部</option>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+
+                    </select><!-- projectManagerQue-->
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 pull-right">
+                        <button class="btn btnsave" type="button" id="searchBtn">查询</button>
+                    </div>
+                    <!--<div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">-->
+                    <!--&lt;!&ndash;粉色的添加按钮&ndash;&gt;-->
+                    <!--<button class="btn btnplus">-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--</button>添加班级-->
+                    <!--</div>-->
+                </div>
+            </form>
+            <!--=================装表格==================-->
+            <div class="row border1">
+                <div class="col-lg-12">
+                    <div class="table-responsive scrollbar">
+                        <table class="table border" id="classTable">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>机构名称</th>
+                                <th>机构头像</th>
+                                <th>创建人</th>
+                                <th>创建时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            <% data.forEach(function(e){%>
+                            <tr>
+                                <td><%= e.id%></td>
+                                <td><%= e.NAME%></td>
+                                <td><%= e.img%></td>
+                                <td><%= e.userName%></td>
+                                <td><%=new Date(e.DATE).toLocaleString()%></td>
+                                <td>
+                                    <%if (e.state==1){%>
+                                    启用
+                                    <%}else{%>
+                                    禁用
+                                    <%}%>
+                                </td>
+                                <td>
+                                    <button class="editBtn btn  btn-info" myid="<%=e.id%>" id="editBtn">修改</button>
+                                    <%if (e.state==1){%>
+                                    <button type="button" class="delBtn btn btn-danger"  myid="<%=e.id%>" stateCode="<%=e.state%>">禁用</button>
+                                    <%}else{%>
+                                    <button type="button" class="delBtn btn btn-success" myid="<%=e.id%>" stateCode="<%=e.state%>">启用</button>
+                                    <%}%>
+                                </td>
+                            </tr>
+                            <%})%>
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <!--页脚的分页-->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="">
+                                <a  aria-label="Previous" id="prev">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li id="pageNum">
+                                <!--<a>1</a>-->
+                            </li>
+                            <li class="">
+                                <a  aria-label="Next" id="next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 确认操作模态框（Modal） -->
+<div class="modal fade"
+     id="myModal" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
+            <div class="modal-header modal0">
+                <!--关闭窗口的××-->
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+                <!--提示信息-->
+                <h4 class="modal-title" id="myModalLabel">
+                    确认此操作吗？
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <!--确认按钮-->
+                <button type="button" class="btnconfirm okBtn" data-toggle="modal" data-target="#myModal2"  data-dismiss="modal"
+                        aria-hidden="true">
+                    确定
+                </button>
+                <!--取消按钮-->
+                <button type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal">
+                    取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--=====================修改模态框=======================-->
+<div class="modal fade bs-example-modal-lg" id="myModal0" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel1"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row borderLine">
+                    <div class="row">
+                        <div class="col-lg-12 h2">新增专家</div>
+                        <div class="col-lg-12 classCreateInfo">
+                            <div class="row">
+                                <div style="display: none"><input type="text" id="agencyId"></div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    机构名称 <input type="text" class="txtBox" id="txtAddAgencyName"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    img <input type="text" class="txtBox" id="txtAddPwd"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    状态
+                                    <select id="addState">
+                                        <option value="1">启用</option>
+                                        <option value="0">禁用</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    权   限
+                                    <select id="addRole">
+                                        <option value="1">管理员</option>
+                                        <option value="0">普通用户</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row updateBtn">
+                    <div class="col-lg-12">
+                        <button type="button" class="btn btn-primary" id="addAgencyBtn">确认修改</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="js/ajax.js"></script>
+<script src="js/Agency.js"></script>
+</body>
+</html>

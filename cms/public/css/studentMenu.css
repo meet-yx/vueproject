@@ -1,0 +1,261 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.lie{
+    background-color:#eef9f0;
+    border-radius: 5px;
+}
+.stuinfo{
+    background-color:white;
+    /*border-radius: 5px;*/
+
+}
+@font-face {
+    font-family: 'iconfont';
+    src: url('../bootstrap-3.3.7-dist/fonts/font_392052_jfhmcvnxuoldte29/iconfont.eot');
+    src: url('../bootstrap-3.3.7-dist/fonts/font_392052_jfhmcvnxuoldte29/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('../bootstrap-3.3.7-dist/fonts/font_392052_jfhmcvnxuoldte29/iconfont.woff') format('woff'),
+    url('../bootstrap-3.3.7-dist/fonts/font_392052_jfhmcvnxuoldte29/iconfont.ttf') format('truetype'),
+    url('../bootstrap-3.3.7-dist/fonts/font_392052_jfhmcvnxuoldte29/iconfont.svg#iconfont') format('svg');
+}
+.iconfont{
+    font-family:"iconfont" !important;
+}
+.row{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: transparent;
+}
+
+.col-lg-12,.col-lg-2{
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
+}
+
+/*滚动条部分*/
+.scrollbar::-webkit-scrollbar{
+    width:8px;
+    height:8px;
+}
+.scrollbar::-webkit-scrollbar-button{
+    width:8px;
+    height:8px;
+}
+.scrollbar::-webkit-scrollbar-track{
+    background: transparent;
+    border-radius: 4px;
+
+}
+.scrollbar::-webkit-scrollbar-track-piece {
+    background: transparent;
+    border-radius: 4px;
+}
+.scrollbar::-webkit-scrollbar-thumb       {
+    background:rgba(221,237,224,1);
+    border-radius:4px;
+}
+.scrollbar::-webkit-scrollbar-corner      {
+    background:transparent;
+}
+
+/*===========�����==============*/
+.container-fluid{
+    width: 100%;
+    height:100%;
+    /*background-size:100%;*/
+    padding:2%;
+}
+
+/*===================���=========================
+����������֮��ļ��3%*/
+.border{
+    /*height: 80px;*/
+    border-radius: 10px;
+    background-color:  #eef9f0;
+}
+.stuGurautee{
+    padding-bottom: 12px;
+}
+/*=================�����Ͳ�ѯ===================*/
+
+/*��ѯ��ť*/
+.btnconfirm{
+    color: white;
+    background-color:#F0BCB4;
+    width: 85px;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: -10px;
+    border-style:none;
+}
+.btnconfirm:hover{
+    background-color: #FA9FA4;
+    cursor: pointer;
+}
+/*��ɫ����Ӱ�ť*/
+.btnplus{
+    height:40px;
+    width: 40px;
+    border-style: none;
+    border-radius: 50%;
+    background-color: #F0BCB4;
+}
+
+.glyphicon-plus{
+    color: white;
+}
+.btnplus:hover{
+    background-color:#FA9FA4;
+}
+/*.btnsearch{*/
+/*margin-right: 15px;*/
+/*}*/
+.myButton{
+    padding: 45px 0 0 0;
+}
+/*===============ѧ��=============*/
+.txtSpan span{
+    margin-right: 20px;
+}
+.txtSpan input{
+    margin-left: 10px;
+}
+/*============���Box======================*/
+.border1{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: white;
+    padding-bottom: 4%;
+    padding-left: 4%;
+    padding-right: 4%;
+    /*padding: 4%;*/
+    padding-top:1%;
+    /*margin-top: 2%;*/
+}
+.table{
+    height: 450px;
+    border-radius: 10px;
+    background-color: #eef9f0;
+    margin:0;
+}
+tr{
+    height: 47px;
+    border: none;
+}
+th{
+    background-color: #ddede0;
+    text-align: center;
+}
+.table>tbody>tr>th{
+    vertical-align: middle;
+}
+.table>tbody>tr>td{
+    vertical-align: middle;
+    border: none;
+}
+.table>tbody>tr>td>span{
+   padding: 0 35px 0 0;
+}
+/*======================����=======================*/
+.contantBox{
+    width: 100%;
+    height: 100%;
+    background-color:rgba(255,255,255,0);
+    /*padding: 2%;*/
+}
+/*===================���м===========*/
+.crumbs{
+    font-size: 20px;
+    line-height: 32px;
+    /*border-top-left-radius:10px;*/
+    /*border-top-right-radius:10px;*/
+    /*background-color: #ddede0;*/
+    text-align: left;
+}
+.hcrubs{
+    text-align: left;
+    /*padding: 5px 0;*/
+    font-size: 20px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.txtBox{
+    height:28px;
+    margin: 10px 0;
+    width: 100px;
+    border: none;
+}
+.txtBbox{
+    height:150px;
+    margin: 10px 0;
+    width: 900px;
+    border: none;
+}
+.txtSearch{
+    padding: 15px;
+}
+/*=================�������===============*/
+.pagination{
+    margin-top: 2%;
+    margin-bottom:0;
+}
+.pagination>.active>a, .pagination>.active>a:hover, .pagination>.active>span,  .pagination>.active>span:hover{
+    background-color: pink;
+    background-color: #FA9FA4;
+    border-color:snow;
+    /*background-color: rgba(255,255,255,0);*/
+}
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding:6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color:#FA9FA4;
+    text-decoration: none;
+    border: 1px solid #F0BCB4;
+    /*border: none;*/
+}
+.pagination>li>a:hover{
+    color:white;
+    /*background-color: rgba(255,255,255,0);*/
+    border-color: inherit;
+}
+
+.infoBlock{
+    /*background-color: white;*/
+    border-radius: 5px;
+}
+
+label{
+    width: 80px;
+}
+
+.listItem{
+    margin: 10px 0;
+}
+
+.listItem .txtBox1{
+    border: 0;
+    height: 20px;
+    width: 180px;
+}
+
+.txtBox2{
+    width: 70%;
+    height: 80px;
+    border: 0;
+}
+
+
+
+.crumbsTxt {
+    color: rgb(40, 96, 144);
+}

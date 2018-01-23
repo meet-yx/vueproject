@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <!-- Bootstrap -->
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="css/classManage.css"/>
+
+</head>
+<body class="scrollbar">
+<div class="container-fluid"><!--最外层-->
+    <div class="row">
+        <div class="col-lg-12 titleDiv">
+            <p class="crumbs">专家管理</p>
+            <!--粉色的添加按钮-->
+            <div class="addBtn" data-toggle="modal" data-target="#myModal0">
+                <button class="btn btnplus" id="addb" type="button">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button><span class="addUser">添加用户</span>
+            </div>
+        </div>
+    </div>
+    <div class="row contantBox">
+        <!--装内容的Box-->
+        <div class="col-lg-12">
+            <!--=============装查询===============-->
+            <form class="row border3 ">
+                <div class="col-lg-12 txtSearch">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        用户ID <input type="text" class="txtBox" id="txtUserName"/><!-- classNoQue-->
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        真实姓名 <input type="text" class="txtBox" id="txtRealName"/><!-- classNameQue-->
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que" style="margin-left: -30px">
+                        状态 <select name="txtState" id="txtState">
+                        <option value="">全部</option>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+
+                    </select><!-- projectManagerQue-->
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 pull-right">
+                        <button class="btn btnsave" type="button" id="searchBtn" >查询</button>
+                    </div>
+                    <!--<div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">-->
+                    <!--&lt;!&ndash;粉色的添加按钮&ndash;&gt;-->
+                    <!--<button class="btn btnplus">-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--</button>添加班级-->
+                    <!--</div>-->
+                </div>
+            </form>
+            <!--=================装表格==================-->
+            <div class="row border1">
+                <div class="col-lg-12">
+                    <div class="table-responsive scrollbar">
+                        <table class="table border" id="classTable">
+                            <thead>
+                            <tr>
+                                <th>专家ID</th>
+                                <th>专家名字</th>
+                                <th>专家称谓</th>
+                                <th>专家描述</th>
+                                <th>创建人</th>
+                                <th>创建时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
+
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                                <%for(var i=0;i<data.length;i++){%>
+                                <tr>
+                                    <td><%=data[i].id%></td>
+                                    <td><%=data[i].NAME%></td>
+                                    <td><%=data[i].title%></td>
+                                    <td><%=data[i].description%></td>
+                                    <td><%=data[i].createuser%></td>
+                                    <td><%=data[i].DATE%></td>
+                                    <td><%=data[i].state%></td>
+                                    <td>
+                                        <button type="button" class="btn"  myid="<%=data[i].Id%>" onclick="startstate('<%=data[i].id%>')">
+                                            <%if(data[i].State==1){%>
+                                            禁用
+                                            <%}else{%>
+                                            启用
+                                            <%}%></button>
+                                        <button type="button" myid="<%=data[i].Id%>" class="delBtn btn" stateCode="<%=data[i].State%>" onclick="endstate('<%=data[i].id%>')">
+                                            <%if(data[i].State==1){%>
+                                            启用
+                                            <%}else{%>
+                                            禁用
+                                            <%}%>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <!--页脚的分页-->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="">
+                                <a  aria-label="Previous" id="prev">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li id="pageNum">
+
+                            </li>
+                            <li class="">
+                                <a  aria-label="Next" id="next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 确认操作模态框（Modal） -->
+<div class="modal fade"
+     id="myModal" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
+            <div class="modal-header modal0">
+                <!--关闭窗口的××-->
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+                <!--提示信息-->
+                <h4 class="modal-title" id="myModalLabel">
+                    确认此操作吗？
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <!--确认按钮-->
+                <button type="button" class="btnconfirm okBtn" data-toggle="modal" data-target="#myModal2"  data-dismiss="modal"
+                        aria-hidden="true">
+                    确定
+                </button>
+                <!--取消按钮-->
+                <button type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal">
+                    取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--=====================修改模态框=======================-->
+<div class="modal fade bs-example-modal-lg" id="myModal0" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel1">编辑</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row borderLine">
+                    <div class="row">
+                        <div class="col-lg-12 h2">专家信息</div>
+                        <div class="col-lg-12 classCreateInfo">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    专家名字 <input type="text" class="txtBox" id="name"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    专家称谓 <input type="text" class="txtBox" id="uname"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    &ensp;状态 <select  class="txtBox" id="state">
+                                    <option value="1">启用</option>
+                                    <option value="0">禁用</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="row beizhu">
+                                <div class="col-lg-offset-2 col-lg-6">
+                                    <span>专家描述</span>
+
+                                    <textarea rows="5" id="des"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listItem col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <p class="message"></p>
+                    </div>
+                    <div class="row updateBtn">
+                        <div class="col-lg-12">
+                            <button type="button" class="btn btn-primary" id="updateBtn">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-example-modal-lg" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel11">编辑</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row borderLine">
+                    <div class="row">
+                        <div class="col-lg-12 h2">专家信息</div>
+                        <div class="col-lg-12 classCreateInfo">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    专家名字 <input type="text" class="txtBox" id="name1"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    专家称谓 <input type="text" class="txtBox" id="uname1"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    &ensp;状态 <select  class="txtBox" id="state1">
+                                    <option value="1">启用</option>
+                                    <option value="0">禁用</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="row beizhu">
+                                <div class="col-lg-offset-2 col-lg-6">
+                                    <span>专家描述</span>
+
+                                    <textarea rows="5" id="des1"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listItem col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <p class="message"></p>
+                    </div>
+                    <div class="row updateBtn">
+                        <div class="col-lg-12">
+                            <button type="button" class="btn btn-primary" onclick="saveupdate()">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="js/ajax.js"></script>
+
+<script>
+    "use strict";
+    var nexte =1; //初始页面
+    var nexPage=4;// 每页数量
+    var totalPage;//总页数
+    var totalNum;//数据库总条数
+    pageF()
+    // 获取分页查询
+    function pageF(page=1){
+        nexte=page;
+        let nameber =$("#txtUserName").val();
+        let name =$("#txtRealName").val();
+        let param="nameber="+nameber+"&name="+name+"&page="+nexte;
+//        let param={nameber:nameber,name:name,page:nexte};
+        ajax("post","/pageLet.do",param,function(data){
+            let p=JSON.parse(data);
+            let obj =p.data;
+            let taltol=p.suec;
+            console.log()
+            console.log("当前数据条数为",taltol[0].toltal)
+            let pagecount=Math.ceil(taltol[0].toltal/4)//用数据条数得出页数
+            totalPage=pagecount;
+            $("#pageNum").html("")
+            for(var i=0;i<pagecount;i++)  //
+            {
+                $("#pageNum").append("<a onclick='pageF("+(i+1)+")'>"+(i+1)+"</a>");  // 点击页码进行翻页
+            }
+            let str="";
+            for (var i = 0; i < obj.length; i++) {
+                var state=""
+                if(obj[i].state==1)
+                {
+                    state="启用"
+                }else{
+                    state="禁用"
+                }
+                str+="<tr>"+
+                    "<td>"+obj[i].id+"</td>"+
+                    "<td>"+obj[i].NAME+"</td>"+
+                    "<td>"+obj[i].title+"</td>"+
+                    "<td>"+obj[i].description+"</td>"+
+                    "<td>"+obj[i].createuser+"</td>"+
+                    "<td>"+obj[i].DATE+"</td>"+
+                    "<td>"+state+"</td>"+
+                    "<td>"+
+                    "<button class='editBtn btn btn-info' onclick='update("+obj[i].id+")'>修改"+
+                    "<button class='editBtn btn btn-danger' myid='"+obj[i].id+"' onclick='startstate("+obj[i].id+",1)' >启用</button>"+
+                    "<button class='delBtn btn btn-success' myid='"+obj[i].id+"' stateCode='"+obj[i].id+"' onclick='startstate("+obj[i].id+",0)'>禁用                                                                                                                                        </button>"
+                    +
+                    "</tr>"
+
+        }
+            $("#tbody").html(str);
+    });
+    }
+   // 调用的分页数据
+    $("#searchBtn").click(function(){
+        pageF()
+        reload();
+    });
+
+function reload()
+{
+    ajax("get","/getList.do",null,function(data){ //调用封装AJAX请求 第一个是请求，第二个是拦截地址，
+        var obj=JSON.parse(data).data.length;
+        pageF(obj)
+    })
+}
+//新增专家信息
+    $("#updateBtn").click(function(){
+               let name = $("#name").val();
+               let uname =$("#uname").val();
+               let curnetdate=new Date(); //定义一个DATA方法
+               let createdate =curnetdate.getFullYear()+"-"+(curnetdate.getMonth()+1)+"-"+curnetdate.getDate() //获取时间
+               let state=$("#state").val();
+               let des=$("#des").val();
+             let param ="name="+name+"&uname="+uname+"&createdate="+createdate+
+                     "&state="+state+"&des="+des;
+                //  数据库的参数要对应
+              ajax("post","/xinZen.do",param,function(data){
+                  console.log(data);
+                  let obj =JSON.parse(data).data;
+                  console.log("数据",obj);
+                if(obj.affectedRows>0){
+                    $("#myModal0").modal("hide");
+                    pageF(nexte)
+
+                }else{
+                    alert("错误")
+                }
+
+        });
+    });
+// 点击上一翻页
+    $("#prev").click(function(){
+        if(nexte>1){
+            nexte--;
+            //重新加载当前文档。
+            pageF(nexte)
+        }
+    });
+
+    //点击下一翻页
+    $("#next").click(function(){
+        if(nexte<totalPage){
+            nexte++;
+            pageF(nexte)
+        }
+        //  对应 totalPage=pagecount;  拿到的值。
+    })
+    function startstate(id,state)
+    {
+
+        $.ajax({
+            url:"/startstate",
+            type:"post",
+            data:{id:id,state:state},
+            success(data)
+        {
+           console.log(data);
+            pageF(nexte)
+        }
+        })
+    }
+    var curend;
+
+     //拿到修改ID发送请求得到当前id的表中数据的值显示到模态框
+    function update(id)
+    {
+        curend=id; //定义一个变量  把ID 存到curend;
+
+        $("#myModal1").modal("show");
+//        $.ajax({
+//            url:"/getSpecial",
+//            type:"post",
+//            data:{id:id},
+//            success(data)
+//        {
+//
+//             $("#name1").val(data[0].name); // 对应数数据库 修改值得名字
+//            $("#uname1").val(data[0].title);
+//            let state=$("#state1").find("option[value="+data[0].state+"]")[0].selected=true;
+//            let des=$("#des1").val(data[0].description);
+//            //  拿到修改ID 的 几条属性值。
+//        }
+//        })
+        $.post("/getSpecial",{"id":id},function(data){
+            $("#name1").val(data[0].name); // 对应数数据库 修改值得名字
+            $("#uname1").val(data[0].title);
+            let state=$("#state1").find("option[value="+data[0].state+"]")[0].selected=true;
+            let des=$("#des1").val(data[0].description);
+        })
+
+    }
+function saveupdate()
+{
+
+    let name=$("#name1").val();
+   let title= $("#uname1").val();
+    let state=$("#state1").val();
+    let des=$("#des1").val();
+
+
+//    $.ajax({
+//        url:"/updateSpectial",
+//        type:"post",
+//        data:{id:curend,name:name,title:title,state:state,des:des},
+//        success(data);
+//    {
+//        console.log(data);
+//        $("#myModal1").modal("hide");
+//        pageF(nexte);
+//        //调用分页的属性。修改后刷新数据库 显示修改后的值
+//
+//    }
+//    })
+    $.post("/updateSpectial",{id:curend,name:name,title:title,state:state,des:des},function(data){
+        console.log(data);
+        $("#myModal1").modal("hide");
+        pageF(nexte);
+        //调用分页的属性。修改后刷新数据库 显示修改后的值
+    })
+}
+
+
+
+
+
+</script>
+</body>
+</html>

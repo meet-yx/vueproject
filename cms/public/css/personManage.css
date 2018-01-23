@@ -1,0 +1,453 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+    font-family: 'iconfont';
+    src: url('../bootstrap-3.3.7-dist/fonts/font_392052_jfhmcvnxuoldte29/iconfont.eot'); /* IE9*/
+    src: url('../bootstrap-3.3.7-dist/fonts/font_392052_jfhmcvnxuoldte29/iconfont.woff'); /* IE6-IE8 */
+
+}
+
+body{
+    background-color: transparent;
+}
+
+.iconfont{
+    font-family:"iconfont" !important;
+    /*font-size:16px;*/
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+tr:first-child{
+    height: 40px;
+}
+
+/*滚动条部分*/
+.scrollbar::-webkit-scrollbar{
+    width:8px;
+    height:8px;
+}
+.scrollbar::-webkit-scrollbar-button{
+    width:8px;
+    height:8px;
+}
+.scrollbar::-webkit-scrollbar-track{
+    background: transparent;
+    border-radius: 4px;
+
+}
+.scrollbar::-webkit-scrollbar-track-piece {
+    background: transparent;
+    border-radius: 4px;
+}
+.scrollbar::-webkit-scrollbar-thumb       {
+    background:rgba(221,237,224,1);
+    border-radius:4px;
+}
+.scrollbar::-webkit-scrollbar-corner      {
+    background:transparent;
+}
+
+
+a{
+    color: #464646;
+}
+a:link{
+    text-decoration-line: none;
+}
+a:visited{
+    text-decoration-line: none;
+}
+a:hover{
+    text-decoration-line: none;
+}
+a:active{
+    text-decoration-line: none;
+}
+
+input{
+    height:28px;
+    margin: 10px 0;
+    width: 120px;
+    border: none;
+}
+
+select{
+    height:28px;
+    margin: 10px 0;
+    width: 120px;
+    border: none;
+}
+.row{
+    margin: 0 0 20px 0;
+    padding: 0;
+}
+.col-lg-12,.col-lg-2{
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
+}
+/*===========�����==============*/
+.container-fluid{
+    width: 100%;
+    height:100%;
+    background-size:100%;
+    background-position: center;
+    padding:2%;
+}
+
+/*===================���=========================
+����������֮��ļ��3%*/
+/*.mainBox{*/
+/*/!*width: 96%;*!/*/
+/*height: 96%;*/
+/*background-color: orangered;*/
+/*position: relative;*/
+/*padding:2%;*/
+/*}*/
+.border{
+    border-radius: 10px;
+    background-color:  #eef9f0;
+}
+/*============���Box======================*/
+.border1{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #eef9f0;
+    padding: 2%;
+    margin-top: 2%;
+}
+.table{
+    height: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    margin:0;
+}
+.table>tbody>tr{
+     height:50px;
+ }
+.table>tbody>tr>th{
+    background-color: #ddede0;
+    text-align: center;
+    vertical-align: middle;
+}
+.table>tbody>tr>td{
+    vertical-align: middle;
+}
+/*======================����=======================*/
+.contantBox{
+    width: 100%;
+    height: 100%;
+    background-color:rgba(255,255,255,0);
+    /*padding: 2%;*/
+}
+/*===================���м===========*/
+.crumbs{
+    font-size: 20px;
+    text-align: left;
+    padding:0 0 10px 0;
+}
+
+.txtBox{
+    height:28px;
+    margin: 10px 0;
+    width: 100px;
+    border: none;
+}
+.txtSearch{
+    padding: 10px;
+}
+.personQuery{
+    padding-right: 0;
+}
+
+/*��ѯ��ť*/
+.personInsBut{
+    margin-bottom: 12px;
+}
+
+.addText{
+    margin-left: 15px;
+}
+
+.personSearch{
+    height:30px;
+    width: 85px;
+    border-style:none;
+    background-color:#F0BCB4;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 3.5%;
+    color: white;
+}
+.personSearch:hover{
+    background-color:#FA9FA4;
+    color: white;
+}
+/*��ɫ����Ӱ�ť*/
+.btnplus{
+    height:40px;
+    width: 40px;
+    border-style: none;
+    border-radius: 50%;
+    background-color: #F0BCB4;
+    margin-left: 30px;
+    text-align: center;
+    line-height: 28px;
+}
+.glyphicon-plus{
+    color: white;
+    margin-left: 2px;
+}
+.glyphicon-plus>span{
+    color: #666;
+    /*margin-left: 10%;*/
+}
+.btnplus:hover{
+    background-color:#FA9FA4;
+}
+/*ɾ��*/
+.deleteData:hover{
+    cursor: pointer;
+}
+
+/*ҳ�ŵķ�ҳ*/
+.pagination>.active>a, .pagination>.active>a:hover, .pagination>.active>span,  .pagination>.active>span:hover{
+    /*background-color: pink;*/
+    background-color: #FA9FA4;
+    border-color:snow;
+}
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color:#FA9FA4;
+    text-decoration: none;
+    border: 1px solid #F0BCB4;
+}
+.pagination>li>a:hover{
+    color:white;
+    background-color: pink;
+    border-color: inherit;
+}
+
+/*=================?????????=================*/
+.modal-dialog{
+    width:60%;
+    height:85%;
+}
+.modal-content{
+    width:100%;
+    height:100%;
+    /*background-color: white;*/
+}
+.modal-header {
+    margin: 0 -15px;
+    padding: 10px 0;
+    background-color: #ddede0;
+    /* border-bottom: 1px solid #e5e5e5; */
+}
+.modal-body {
+    /*margin: 0 -15px;*/
+    width: 95%;
+    height: 76%;
+    margin-left: 10px;
+    margin-top: 30px;
+    border: 2px dashed #e5e5e5;
+    /* border-bottom: 1px solid #e5e5e5; */
+}
+.modal-footer {
+    padding: 15px;
+    text-align: right;
+    border-top: 0px solid #e5e5e5;
+}
+/*================????=============*/
+.modal-title>span{
+    padding: 0 15px;
+}
+.modal-header>button{
+    padding: 0 15px;
+}
+/*===============???===============*/
+.largeBorder{
+    width: 95%;
+    margin-left:15px;
+}
+.lhcrubs{
+    text-align: left;
+    margin-left: 15px;
+}
+/*.txtBox1{*/
+    /*height:20px;*/
+    /*/!*margin: 10px 0;*!/*/
+    /*width: 80px;*/
+    /*border: none;*/
+/*}*/
+/*.txtBbox1{*/
+    /*width: 440px;*/
+    /*height: 85px;*/
+    /*border: none;*/
+/*}*/
+
+.txtBox2{
+    height:50px;
+    width: 80%;
+    border: none;
+}
+
+.mytable>tbody>tr>td>span{
+    padding: 0 25px 0 0;
+}
+/*===================?????==================*/
+/*???*/
+#btnAlter{
+    color: white;
+    margin: 10px 0;
+    background-color:#F0BCB4;
+    width: 85px;
+    height: 30px;
+    border-radius: 5px;
+    /*margin-right: 80px;*/
+    border-style:none;
+}
+/*================??????=================*/
+#btnCancel{
+    color: white;
+    margin: 10px 0;
+    background-color:#F0BCB4;
+    width: 85px;
+    height: 30px;
+    border-radius: 5px;
+    /*margin-right: 190px;*/
+    border-style:none;
+}
+
+.btnGroup{
+    text-align: center;
+    height: 3px;
+}
+
+.listBlock{
+    /*padding: 10px 5px;*/
+    background-color:  #eef9f0;
+    border-radius: 10px;
+}
+
+.listBlock span{
+    display: inline-block;
+    width:80px;
+}
+.listItem{
+    padding: 0;
+    margin: 10px 0;
+}
+
+.listItem label{
+    width: 80px;
+}
+
+.modal-content{
+    height:auto;
+    padding-bottom: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+    th{
+        min-width: 80px;
+    }
+    .modal-content{
+        height:auto;
+        width: 100%;
+    }
+}
+
+.reachText {
+    /*��һ�б�ͷ�������ı���*/
+    padding: 7px 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color:#ddede0 ;
+}
+.reachText input{
+    width: 200px;
+}
+
+.titleBlock{
+    margin: 0 0 0 0;
+}
+
+.txtSearch>div>span{
+    display: inline-block;
+    width: 60px;
+}
+/*================删除模态框===============*/
+#myModaldel{
+    width: 40%;
+    height: 40%;
+    margin: 200px auto;
+}
+.modal0{
+    padding: 10%;
+    border-style: none;
+    background-color: white;
+    border-bottom:0;
+    border-radius: 5px;
+}
+.modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+/*.okBtn{*/
+    /*padding: 5px 27px;*/
+    /*margin-right: 40px;*/
+    /*border-radius: 5px;*/
+    /*border: none;*/
+    /*background-color:#F0BCB4;*/
+/*}*/
+/*.okBtn>span{*/
+    /*color: white;*/
+/*}*/
+.myCancelbtn {
+    padding: 5px 27px;
+    margin-left: 25px;
+    /*border: none;*/
+    /*background-color:#F0BCB4;*/
+}
+.myCancelbtn:hover {
+    padding: 4px 27px;
+    background-color:#FA9FA4;
+}
+/*.myCancelbtn>span{*/
+    /*color: white;*/
+/*}*/
+.modalQuren{
+    border-top:0;
+}
+.modal-content {
+    height: auto;
+    padding-bottom: 5px;
+    /*border-radius: 5px;*/
+}
+
+
+/*==================确认按钮*/
+.btnconfirm{
+    color: white;
+    background-color:#F0BCB4;
+    width: 85px;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: -10px;
+    border-style:none;
+}
+.btnconfirm:hover{
+    background-color: #FA9FA4;
+    cursor: pointer;
+}

@@ -1,0 +1,201 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.row{
+    margin: 0;
+    padding: 0;
+}
+.col-lg-12,.col-lg-2{
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
+}
+
+
+/*===========�����==============*/
+.container-fluid{
+    width: 100%;
+    height:100%;
+    /*background-image: url("../img/bg.jpg");*/
+    background-size:100%;
+    background-position: center;
+    padding:2%;
+}
+
+/*===================���=========================
+����������֮��ļ��3%*/
+/*.mainBox{*/
+/*/!*width: 96%;*!/*/
+/*height: 96%;*/
+/*background-color: orangered;*/
+/*position: relative;*/
+/*padding:2%;*/
+/*}*/
+.bg-white{                          /*�󱳾����ɫ*/
+    /*background-color: white;*/
+    border-radius: 10px;
+}
+
+.border{
+    /*height: 80px;*/
+    border-radius: 10px;
+    background-color:  #eef9f0;
+}
+/*============�м䲿��======================*/
+.border1{                       /*���*/
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #eef9f0;
+    padding-bottom: 1%;
+    /*margin: 2% 10%;*/
+}
+.reachText{                     /*��һ�б�ͷ�������ı���*/
+    padding: 5px 10px;
+    background-color: rgb(221,238,222);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.name-text{                     /*�ڶ��еĵ�һ�������*/
+    padding: 10px;
+}
+
+.panddingLeft {
+    padding-left: 0;
+}
+.panddingRight{
+    padding-right: 0;
+}
+input{              /*�ı���߿�Ҫ*/
+    border:none;
+}
+textarea{           /*�����ı���*/
+    width: 100%;
+    border: none;
+}
+
+/*��ɫ���水ť�����Ըı�����*/
+/*.btnadd{*/
+    /*color: white;*/
+    /*background-color:#F0BCB4;*/
+    /*padding:5px 35px;*/
+    /*border-radius: 5px;*/
+    /*border-style:none;*/
+    /*cursor: pointer;*/
+/*}*/
+.btnadd{
+    color: white;
+    background-color:#F0BCB4;
+    padding:5px 35px;
+    border-radius: 5px;
+    border-style:none;
+    cursor: pointer;
+}
+/*��ɫ����*/
+.btnadd:hover{
+    color: white;
+    background-color:#FA9FA4;
+}
+
+/*��ɫ��ȡ����ť*/
+.btnquxiao{
+    background-color: white;
+    border:1px solid #F0BCB4;
+    padding: 5px 35px;
+    border-radius: 5px;
+    cursor:pointer;
+    color:#F0BCB4;
+}
+.btnquxiao:hover{
+    color:white;
+    background-color:#FA9FA4;
+}
+
+
+
+/*��ɫ����Ӱ�ť*/
+.btnplus{
+    height:40px;
+    width: 40px;
+    border-style: none;
+    border-radius: 50%;
+    background-color: #F0BCB4;
+}
+
+.glyphicon-plus{
+    color: white;
+}
+.btnplus:hover{
+    background-color:#FA9FA4;
+}
+
+
+/*��ɫ��ɾ����ť*/
+.btndelete{
+    height:40px;
+    width: 40px;
+    border-style: none;
+    border-radius: 50%;
+    background-color:#999;
+
+}
+.glyphicon-minus{
+    color: white;
+}
+.btndelete:hover{
+    background-color:#666;
+
+}
+
+
+/*.table{
+    height: 400px;
+    /!*background-color: #fff;*!/
+    border-radius: 10px;
+    margin:0;
+}
+th{
+    background-color: #ddede0;
+    text-align: center;
+}
+.table>tbody>tr>th{
+    vertical-align: middle;
+}*/
+
+
+/*============�м䲿��======================*/
+
+
+/*===================���м===========*/
+.crumbs{
+    font-size: 20px;
+    line-height: 32px;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+    padding:0 3%;
+    text-align: left;
+}
+
+.txtBox{
+    height:28px;
+    margin: 10px 0;
+    width: 100px;
+    border: none;
+}
+.txtSearch{
+    /*padding: 15px;*/
+    /*background-color: white;*/
+    text-align: left;
+    vertical-align: middle;
+    font-size: 20px;
+    padding-left: 10%;
+    color: #286090;
+
+}
+.crumbsTxt{
+    color: #286090;
+}
+body{
+    background-color: transparent;
+}

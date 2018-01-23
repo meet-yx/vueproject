@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot"/>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff"/>
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/classManage.css"/>
+    <title></title>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="scrollbar">
+<div class="container-fluid"><!--最外层-->
+    <div class="row">
+        <div class="col-lg-12 titleDiv">
+            <p class="crumbs">订单管理</p>
+            <!--粉色的添加按钮-->
+            <div class="addBtn" data-toggle="modal" data-target="#myModal0">
+                <button class="btn btnplus" id="addb" type="button">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button><span class="addorder">添加订单</span>
+            </div>
+        </div>
+    </div>
+    <div class="row contantBox">
+        <!--装内容的Box-->
+        <div class="col-lg-12">
+            <!--=============装查询===============-->
+            <form class="row border3 ">
+                <div class="col-lg-12 txtSearch">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        订单号 <input type="text" class="txtBox" id="txtid"/><!-- classNoQue-->
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que">
+                        快递单号 <input type="text" class="txtBox" id="txtcouierNum"/><!-- classNoQue-->
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 que" style="margin-left: -30px">
+                        状态 <select name="txtState" id="txtState">
+                        <option value="">全部</option>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+
+                    </select><!-- projectManagerQue-->
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 pull-right">
+                        <button class="btn btnsave" type="button" id="searchBtn">查询</button>
+                    </div>
+                </div>
+            </form>
+            <!--=================装表格==================-->
+            <div class="row border1">
+                <div class="col-lg-12">
+                    <div class="table-responsive scrollbar">
+                        <table class="table border" id="classTable">
+                            <thead>
+                            <tr>
+                                <th>订单号</th>
+                                <th>订单状态</th>
+                                <th>快递单号</th>
+                                <th>下单时间</th>
+                                <th>外键用户</th>
+                                <th>收货地址</th>
+                                <th>支付方式</th>
+                                <th>总金额</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            <% data.forEach(function(e){%>
+                            <tr>
+                                <td><%= e.Id%></td>
+                                <td><%= e.orderState%></td>
+                                <td><%= e.courierNum%></td>
+                                <td><%= e.orderDate%></td>
+                                <td><%= e.userName%></td>
+                                <td><%= e.Address%></td>
+                                <td><%= e.payment%></td>
+                                <td><%= e.totalmoney%></td>
+                                <td>
+                                    <%if (e.orderstate==1){%>
+                                    启用
+                                    <%}else{%>
+                                    禁用
+                                    <%}%>
+                                </td>
+                                <td>
+                                    <button type="button" class="editBtn btn  btn-info" myid="<%=e.Id%>" id="editBtn">修改</button>
+
+                                    <%if (e.orderstate==1){%>
+                                    <button class="delBtn btn btn-danger" myid="<%=e.Id%>" StateCode="<%=e.orderstate%>">禁用</button>
+                                    <%}else{%>
+                                    <button class="delBtn btn btn-success" myid="<%=e.Id%>" StateCode="<%=e.orderstate%>">启用</button>
+                                    <%}%>
+                                </td>
+                            </tr>
+                            <%})%>
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <!--页脚的分页-->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="">
+                                <a  aria-label="Previous" id="prev">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li id="pageNum">
+                                <!--<a>1</a>-->
+                            </li>
+                            <li class="">
+                                <a  aria-label="Next" id="next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 确认操作模态框（Modal） -->
+<div class="modal fade"
+     id="myModal" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
+            <div class="modal-header modal0">
+                <!--关闭窗口的××-->
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+                <!--提示信息-->
+                <h4 class="modal-title" id="myModalLabel">
+                    确认此操作吗？
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <!--确认按钮-->
+                <button type="button" class="btnconfirm okBtn" data-toggle="modal" data-target="#myModal2"  data-dismiss="modal"
+                        aria-hidden="true">
+                    确定
+                </button>
+                <!--取消按钮-->
+                <button type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal">
+                    取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--=====================修改模态框=======================-->
+<div class="modal fade bs-example-modal-lg" id="myModal0" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel1"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row borderLine">
+                    <div class="row">
+                        <div class="col-lg-12 h2">修改订单</div>
+                        <div class="col-lg-12 classCreateInfo">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    订单号 <input type="text" class="txtBox" id="Id"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    快递号 <input type="text" class="txtBox" id="courierNum"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    地址 <input type="text" class="txtBox" id="Address"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    电话 <input type="text" class="txtBox" id="Tel"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                    状态
+                                    <select id="addState">
+                                        <option value="1">启用</option>
+                                        <option value="0">禁用</option>
+                                    </select>
+                                </div>
+
+                                <table class="table table-bordered">
+                                    <th>
+                                    <td>订单id</td>
+                                    <td>商品名</td>
+                                    <td>商品数量</td>
+                                    </th>
+                                </table>
+                                <table class="table table-bordered" id="goodsTbody"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row updateBtn">
+                    <div class="col-lg-12">
+                        <button type="button" class="btn btn-primary" id="updateBtn">确认修改</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="js/ajax.js"></script>
+<script src="js/order.js"></script>
+</body>
+</html>
